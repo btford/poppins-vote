@@ -1,5 +1,6 @@
 
 var fs = require('fs');
+var escape = require('escape-html');
 
 module.exports = function (poppins) {
   var plugins = poppins.plugins,
@@ -47,17 +48,18 @@ module.exports = function (poppins) {
         links = [];
       }
       res.send(plugins.vote.header +
-        links.length > 0 ? links.join('\n') : 'There are no issues with votes' +
+        (links.length > 0 ? ('<ul>' + links.join('\n') + '</ul>') : 'There are no issues with votes') +
         plugins.vote.footer);
     },
 
     linkifyIssue: function (issue) {
-      return '<a href="https://github.com/' +
-              poppins.config.user + '/' +
-              poppins.config.user + '/issues/' +
+      return '<li><a href="https://github.com/' +
+              poppins.config.target.user + '/' +
+              poppins.config.target.repo + '/issues/' +
               issue.number + '">#' +
               issue.number + ' ' +
-              issue.title + '</a>';
+              escape(issue.title) + ' (' +
+              issue.vote + ')</a></li>';
 
     },
 
