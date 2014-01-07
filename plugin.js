@@ -27,9 +27,13 @@ module.exports = function (poppins) {
     },
 
     renderPage: function (req, res) {
-      var links;
-      if (poppins.issues) {
-        var filteredIssues = poppins.issues.filter(function (issue) {
+      var links,
+          issues = Object.keys(poppins.issues).map(function (number) {
+            return poppins.issues[number];
+          });
+
+      if (issues) {
+        var filteredIssues = issues.filter(function (issue) {
           return issue.vote >= 0;
         });
 
