@@ -27,14 +27,19 @@ module.exports = function (poppins) {
     },
 
     renderPage: function (req, res) {
-      var filteredIssues = poppins.issues.filter(function (issue) {
-        return issue.vote >= 0;
-      });
+      var links;
+      if (poppins.issues) {
+        var filteredIssues = poppins.issues.filter(function (issue) {
+          return issue.vote >= 0;
+        });
 
-      var sortedIssues = filteredIssues.sort(function (a, b) {
-        return a.vote > b.vote ? -1 : a.vote < b.vote ? 1 : 0;
-      });
-      var links = sortedIssues.map(plugins.vote.linkifyIssue);
+        var sortedIssues = filteredIssues.sort(function (a, b) {
+          return a.vote > b.vote ? -1 : a.vote < b.vote ? 1 : 0;
+        });
+        links = sortedIssues.map(plugins.vote.linkifyIssue);
+      } else {
+        links = [];
+      }
       res.send(plugins.vote.header +
         links.length > 0 ? links.join('\n') : 'There are no issues with votes' +
         plugins.vote.footer);
