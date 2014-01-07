@@ -13,7 +13,9 @@ module.exports = function (poppins) {
     },
 
     calculateVote: function (issue) {
-      var voteComments = issue.comments.filter(plugins.vote.criteria);
+      var voteComments = Object.keys(issue.comments).map(function (number) {
+        return issue.comments[number];
+      }).filter(plugins.vote.criteria);
 
       var uniqueCommentAuthors = voteComments.reduce(function (list, comment) {
         var author = comment.user.login;
