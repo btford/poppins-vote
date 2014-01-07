@@ -73,7 +73,9 @@ module.exports = function (poppins) {
   poppins.on('pullRequestCommentCreated', calculateVote);
 
   poppins.on('cacheBuilt', function () {
-    poppins.issues.forEach(calculateVote);
+    Object.keys(poppins.issues).map(function (number) {
+      return poppins.issues[number];
+    }).forEach(calculateVote);
   });
 
   server.get('/', plugins.vote.renderPage);
