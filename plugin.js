@@ -16,7 +16,7 @@ module.exports = function (poppins) {
       var voteComments = issue.comments.filter(plugins.vote.criteria);
 
       var uniqueCommentAuthors = voteComments.reduce(function (list, comment) {
-        var author = comment.author;
+        var author = comment.user.login;
         if (list.indexOf(author) === -1) {
           list.push(author);
         }
