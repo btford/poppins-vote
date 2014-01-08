@@ -10,7 +10,7 @@ module.exports = function (poppins) {
     token: '+1',
 
     criteria: function (issue) {
-      return issue.body.indexOf(plugins.vote.token) > -1;
+      return issue.body.indexOf(plugins.vote.token) > -1 && (+new Date(issue.created_at) > 1387010567866);
     },
 
     calculateVote: function (issue) {
