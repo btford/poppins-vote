@@ -10,7 +10,7 @@ module.exports = function (poppins) {
     token: '+1',
 
     criteria: function (issue) {
-      return issue.body.indexOf(plugins.vote.token) > 0;
+      return issue.body.indexOf(plugins.vote.token) > -1;
     },
 
     calculateVote: function (issue) {
