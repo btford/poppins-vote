@@ -37,7 +37,7 @@ module.exports = function (poppins) {
 
       if (issues) {
         var filteredIssues = issues.filter(function (issue) {
-          return issue.state === 'open' && issue.vote >= 0;
+          return issue.state === 'open' && issue.vote > 0;
         });
 
         var sortedIssues = filteredIssues.sort(function (a, b) {
